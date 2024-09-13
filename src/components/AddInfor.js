@@ -1,20 +1,20 @@
 import React from "react";
 
-class UserInfor extends React.Component{
+class AddInfor extends React.Component{
     state = {
-        name: 'Nam Lee',
+        name: '',
         address: 'Người dưng',
-        age: 22
+        age: ''
     };
 
     handleClick(event){
-        console.log(event);
-        console.log("ten toi la ", this.state.name);
-        console.log("random", Math.floor((Math.random()*100)+1))
+        // console.log(event);
+        // console.log("ten toi la ", this.state.name);
+        // console.log("random", Math.floor((Math.random()*100)+1))
 
-        this.setState({
-            name: 'Trung Nam',
-        })
+        // this.setState({
+        //     name: 'Trung Nam',
+        // })
         this.setState({
             age: Math.floor((Math.random()*100)+1)
         })
@@ -23,17 +23,22 @@ class UserInfor extends React.Component{
         console.log(event.pageX);
     }
 
-    handleClickChange(event){
+    handleClickName(event){
         this.setState({
-            name: event.target.value
+            name: event.target.value,
         })
 
-        console.log(event, event.target.value);
+        // console.log(event, event.target.value);
     }
 
-    handleClickSubmit(event){
+    handleClickSubmit=(event)=>{
         event.preventDefault();//ko tải lại trang
-        console.log(this.state)
+
+        this.props.handleAddNewUser({
+            id: Math.floor((Math.random()*100)+1)+ '-random',
+            name: this.state.name,
+            age: this.state.age
+        });
     }
 
     handleClickAge(event){
@@ -54,9 +59,9 @@ class UserInfor extends React.Component{
 
                 <form onSubmit={(event)=> this.handleClickSubmit(event)}>
                 <input
-                value={this.state.name}
+                 value={this.state.name}
                 type="Text"
-                onChange={(event)=> this.handleClickChange(event)}
+                onChange={(event)=> this.handleClickName(event)}
                 ></input>
                 <button>Submit</button>
                 </form>
@@ -73,4 +78,4 @@ class UserInfor extends React.Component{
         );
     }
 }
-export default UserInfor;
+export default AddInfor;
